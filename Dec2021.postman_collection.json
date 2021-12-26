@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "ee04bd15-6acc-4aeb-b4ec-bf2fcb224ca4",
+		"name": "Dec2021",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lastName\" : \"covid\",\n    \"email\"     : \"decCovid_1999@gmail.com\",\n    \"password\"  : \"123456\",\n    \"confirmPassword\"  : \"123456\",\n    \"dob\"       : {\n        \"year\"      : \"1988\",\n        \"month\"     : 12,\n        \"day\"       : 31\n    },\n    \"gender\"    : \"female\",\n    \"agree\"     : true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/signup",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "siguup with existing email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\" : \"Dwd\",\n    \"lastName\" : \"covid\",\n    \"email\"     : \"decCovid1@gmail.com\",\n    \"password\"  : \"123456\",\n    \"confirmPassword\"  : \"123456\",\n    \"dob\"       : {\n        \"year\"      : 1980,\n        \"month\"     : 12,\n        \"day\"       : 31\n    },\n    \"gender\"    : \"female\",\n    \"agree\"     : true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://stage.taltektc.com/api/signup",
+					"protocol": "http",
+					"host": [
+						"stage",
+						"taltektc",
+						"com"
+					],
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
