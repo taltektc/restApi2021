@@ -33,13 +33,32 @@
 			"response": []
 		},
 		{
-			"name": "siguup with existing email",
+			"name": "Verify if student is created",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/student/TTC0GDVC",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"student",
+						"TTC0GDVC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student Login",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"firstName\" : \"Dwd\",\n    \"lastName\" : \"covid\",\n    \"email\"     : \"decCovid1@gmail.com\",\n    \"password\"  : \"123456\",\n    \"confirmPassword\"  : \"123456\",\n    \"dob\"       : {\n        \"year\"      : 1980,\n        \"month\"     : 12,\n        \"day\"       : 31\n    },\n    \"gender\"    : \"female\",\n    \"agree\"     : true\n}",
+					"raw": "{\n    \"email\" : \"decCovid2@gmail.com\",\n    \"password\" : \"123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -47,16 +66,80 @@
 					}
 				},
 				"url": {
-					"raw": "http://stage.taltektc.com/api/signup",
-					"protocol": "http",
+					"raw": "{{baseURL}}/api/login",
 					"host": [
-						"stage",
-						"taltektc",
-						"com"
+						"{{baseURL}}"
 					],
 					"path": [
 						"api",
-						"signup"
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update student info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9xYS50YWx0ZWt0Yy5jb20iLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NDA1NDAxNzYsIm5iZiI6MTY0MDU0MDE4NiwiZXhwIjoxNjQwNjI2NTc2LCJpc19hZG1pbiI6ZmFsc2UsImRhdGEiOnsiaWQiOiIxMDAiLCJmaXJzdF9uYW1lIjoiRHdkIiwibGFzdF9uYW1lIjoiY292aWQiLCJlbWFpbCI6ImRlY0NvdmlkMkBnbWFpbC5jb20iLCJzdHVkZW50SWQiOiJUVEMwR0RWQyJ9fQ.A990DP1ik4Y9wGFTJerCzZjfGTl6EfyyTAt60MHYHj8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\" : \"updatedFN\",\n    \"lastName\" : \"updatedLN\",\n    \"email\"     : \"decCovid2@gmail.com\",\n    \"dob\"       : {\n        \"year\"      : 2013,\n        \"month\"     : 12,\n        \"day\"       : 31\n    },\n    \"gender\"    : \"male\",\n    \"agree\"     : true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/student/TTC0GDVC",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"student",
+						"TTC0GDVC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete student from db",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9xYS50YWx0ZWt0Yy5jb20iLCJhdWQiOiJUSEVfQVVESUVOQ0UiLCJpYXQiOjE2NDA1NDAxNzYsIm5iZiI6MTY0MDU0MDE4NiwiZXhwIjoxNjQwNjI2NTc2LCJpc19hZG1pbiI6ZmFsc2UsImRhdGEiOnsiaWQiOiIxMDAiLCJmaXJzdF9uYW1lIjoiRHdkIiwibGFzdF9uYW1lIjoiY292aWQiLCJlbWFpbCI6ImRlY0NvdmlkMkBnbWFpbC5jb20iLCJzdHVkZW50SWQiOiJUVEMwR0RWQyJ9fQ.A990DP1ik4Y9wGFTJerCzZjfGTl6EfyyTAt60MHYHj8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/student/TTC0GDVC",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"student",
+						"TTC0GDVC"
 					]
 				}
 			},
