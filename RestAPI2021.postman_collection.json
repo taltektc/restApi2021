@@ -1,0 +1,828 @@
+{
+	"info": {
+		"_postman_id": "2e6a2f9f-67a8-48dc-8b5b-f33de10f2341",
+		"name": "RestAPI2021",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "First name as null",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// create random email",
+							"const email = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+							"pm.environment.set(\"studentEmail\", email);",
+							"",
+							"// create random first name",
+							"const firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+							"pm.environment.set(\"studentFirstName\", firstName);",
+							"",
+							"// create random last name",
+							"pm.environment.set(\"studentLastName\", pm.variables.replaceIn(\"{{$randomLastName}}\"));",
+							"",
+							"// generate random gender (male/female)",
+							"const genderList = ['male', 'female'];",
+							"const gender = Math.floor(Math.random()*genderList.length);",
+							"pm.environment.set('studentGender', genderList[gender]);",
+							"console.log(genderList[gender]);",
+							"",
+							"// random dob",
+							"pm.environment.set('year', _.random(1980, 2000));",
+							"pm.environment.set('month', _.random(1, 12));",
+							"pm.environment.set('day', _.random(1, 28));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify sytem return 400 when first name is null\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(400);",
+							"    pm.expect(jsonData.error.firstName).to.be.equal('The First Name field is required.')",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\" : null,\n    \"lastName\" : \"{{studentLastName}}\",\n    \"email\"     : \"{{studentEmail}}\",\n    \"password\"  : \"123456\",\n    \"confirmPassword\"  : \"123456\",\n    \"dob\"       : {\n        \"year\"      : {{year}},\n        \"month\"     : {{month}},\n        \"day\"       : {{day}} \n    },\n    \"gender\"    : \"{{studentGender}}\",\n    \"agree\"     : true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/signup",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "First name object is missing",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// create random email",
+							"const email = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+							"pm.environment.set(\"studentEmail\", email);",
+							"",
+							"// create random first name",
+							"const firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+							"pm.environment.set(\"studentFirstName\", firstName);",
+							"",
+							"// create random last name",
+							"pm.environment.set(\"studentLastName\", pm.variables.replaceIn(\"{{$randomLastName}}\"));",
+							"",
+							"// generate random gender (male/female)",
+							"const genderList = ['male', 'female'];",
+							"const gender = Math.floor(Math.random()*genderList.length);",
+							"pm.environment.set('studentGender', genderList[gender]);",
+							"console.log(genderList[gender]);",
+							"",
+							"// random dob",
+							"pm.environment.set('year', _.random(1980, 2000));",
+							"pm.environment.set('month', _.random(1, 12));",
+							"pm.environment.set('day', _.random(1, 28));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify sytem return 400 without firstname object\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lastName\" : \"{{studentLastName}}\",\n    \"email\"     : \"{{studentEmail}}\",\n    \"password\"  : \"123456\",\n    \"confirmPassword\"  : \"123456\",\n    \"dob\"       : {\n        \"year\"      : {{year}},\n        \"month\"     : {{month}},\n        \"day\"       : {{day}} \n    },\n    \"gender\"    : \"{{studentGender}}\",\n    \"agree\"     : true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/signup",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "First name with 2 char",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// create random email",
+							"const email = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+							"pm.environment.set(\"studentEmail\", email);",
+							"",
+							"// create random first name",
+							"const firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+							"pm.environment.set(\"studentFirstName\", firstName);",
+							"",
+							"// create random last name",
+							"pm.environment.set(\"studentLastName\", pm.variables.replaceIn(\"{{$randomLastName}}\"));",
+							"",
+							"// generate random gender (male/female)",
+							"const genderList = ['male', 'female'];",
+							"const gender = Math.floor(Math.random()*genderList.length);",
+							"pm.environment.set('studentGender', genderList[gender]);",
+							"console.log(genderList[gender]);",
+							"",
+							"// random dob",
+							"pm.environment.set('year', _.random(1980, 2000));",
+							"pm.environment.set('month', _.random(1, 12));",
+							"pm.environment.set('day', _.random(1, 28));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify sytem return 400 when first name have less than 3 char\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(400);",
+							"    pm.expect(jsonData.error.firstName).to.be.equal('The First Name field must be at least 3 characters in length.')",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\" : \"ad\",\n    \"lastName\" : \"{{studentLastName}}\",\n    \"email\"     : \"{{studentEmail}}\",\n    \"password\"  : \"123456\",\n    \"confirmPassword\"  : \"123456\",\n    \"dob\"       : {\n        \"year\"      : {{year}},\n        \"month\"     : {{month}},\n        \"day\"       : {{day}} \n    },\n    \"gender\"    : \"{{studentGender}}\",\n    \"agree\"     : true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/signup",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "First name with 12 or more char",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// create random email",
+							"const email = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+							"pm.environment.set(\"studentEmail\", email);",
+							"",
+							"// create random first name",
+							"const firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+							"pm.environment.set(\"studentFirstName\", firstName);",
+							"",
+							"// create random last name",
+							"pm.environment.set(\"studentLastName\", pm.variables.replaceIn(\"{{$randomLastName}}\"));",
+							"",
+							"// generate random gender (male/female)",
+							"const genderList = ['male', 'female'];",
+							"const gender = Math.floor(Math.random()*genderList.length);",
+							"pm.environment.set('studentGender', genderList[gender]);",
+							"console.log(genderList[gender]);",
+							"",
+							"// random dob",
+							"pm.environment.set('year', _.random(1980, 2000));",
+							"pm.environment.set('month', _.random(1, 12));",
+							"pm.environment.set('day', _.random(1, 28));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify sytem return 400 when first name contains more than 12 char\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(400);",
+							"    pm.expect(jsonData.error.firstName).to.be.equal('The First Name field cannot exceed 12 characters in length.')",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\" : \"hassanbhuiyantestbangladesh\",\n    \"lastName\" : \"{{studentLastName}}\",\n    \"email\"     : \"{{studentEmail}}\",\n    \"password\"  : \"123456\",\n    \"confirmPassword\"  : \"123456\",\n    \"dob\"       : {\n        \"year\"      : {{year}},\n        \"month\"     : {{month}},\n        \"day\"       : {{day}} \n    },\n    \"gender\"    : \"{{studentGender}}\",\n    \"agree\"     : true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/signup",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "First name with num",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// create random email",
+							"const email = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+							"pm.environment.set(\"studentEmail\", email);",
+							"",
+							"// create random first name",
+							"const firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+							"pm.environment.set(\"studentFirstName\", firstName);",
+							"",
+							"// create random last name",
+							"pm.environment.set(\"studentLastName\", pm.variables.replaceIn(\"{{$randomLastName}}\"));",
+							"",
+							"// generate random gender (male/female)",
+							"const genderList = ['male', 'female'];",
+							"const gender = Math.floor(Math.random()*genderList.length);",
+							"pm.environment.set('studentGender', genderList[gender]);",
+							"console.log(genderList[gender]);",
+							"",
+							"// random dob",
+							"pm.environment.set('year', _.random(1980, 2000));",
+							"pm.environment.set('month', _.random(1, 12));",
+							"pm.environment.set('day', _.random(1, 28));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify sytem return 400 when first name have number\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(400);",
+							"     pm.expect(jsonData.error.firstName).to.be.equal('The First Name field may only contain alphabetical characters.')",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\" : \"ad33\",\n    \"lastName\" : \"{{studentLastName}}\",\n    \"email\"     : \"{{studentEmail}}\",\n    \"password\"  : \"123456\",\n    \"confirmPassword\"  : \"123456\",\n    \"dob\"       : {\n        \"year\"      : {{year}},\n        \"month\"     : {{month}},\n        \"day\"       : {{day}} \n    },\n    \"gender\"    : \"{{studentGender}}\",\n    \"agree\"     : true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/signup",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// create random email",
+							"const email = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+							"pm.environment.set(\"studentEmail\", email);",
+							"",
+							"// create random first name",
+							"const firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+							"pm.environment.set(\"studentFirstName\", firstName);",
+							"",
+							"// create random last name",
+							"pm.environment.set(\"studentLastName\", pm.variables.replaceIn(\"{{$randomLastName}}\"));",
+							"",
+							"// generate random gender (male/female)",
+							"const genderList = ['male', 'female'];",
+							"const gender = Math.floor(Math.random()*genderList.length);",
+							"pm.environment.set('studentGender', genderList[gender]);",
+							"console.log(genderList[gender]);",
+							"",
+							"// random dob",
+							"pm.environment.set('year', _.random(1980, 2000));",
+							"pm.environment.set('month', _.random(1, 12));",
+							"pm.environment.set('day', _.random(1, 28));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify RC should be 201 upon student signup\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(201);",
+							"});",
+							"",
+							"pm.test(\"Verify success should be true upon student signup\", function () {",
+							"    pm.expect(jsonData.success).to.be.eql(true);",
+							"});",
+							"",
+							"pm.test(\"Verify Registration Success message upon student signup\", function () {",
+							"    pm.expect(jsonData.message).to.be.eql(\"Registration Success\");",
+							"});",
+							"",
+							"pm.test(\"Verify property Id is present upon student signup\", function () {",
+							"    pm.expect(jsonData).to.have.property('id');",
+							"});",
+							"",
+							"// store data from response body",
+							"pm.environment.set(\"studentId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\" : \"{{studentFirstName}}\",\n    \"lastName\" : \"{{studentLastName}}\",\n    \"email\"     : \"{{studentEmail}}\",\n    \"password\"  : \"123456\",\n    \"confirmPassword\"  : \"123456\",\n    \"dob\"       : {\n        \"year\"      : {{year}},\n        \"month\"     : {{month}},\n        \"day\"       : {{day}} \n    },\n    \"gender\"    : \"{{studentGender}}\",\n    \"agree\"     : true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/signup",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify if student is created",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify RC should be 200 upon getting student info\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(200);",
+							"});",
+							"",
+							"pm.test(\"Verify message should read student found\", function () {",
+							"    pm.expect(jsonData.message).to.be.eql('Student Found');",
+							"});",
+							"",
+							"pm.test(\"Verify Student first name\", function () {",
+							"    pm.expect(jsonData.data.firstName).to.be.eql(environment.studentFirstName);",
+							"});",
+							"",
+							"pm.test(\"Verify Student DOB\", function () {",
+							"    //pm.expect(jsonData.data.dob).to.be.eql(environment.year+'-'+environment.month+'-'+environment.day);",
+							"    if(environment.month <10){",
+							"        pm.expect(jsonData.data.dob).to.be.eql(environment.year+'-'+0+environment.month+'-'+environment.day);",
+							"    } ",
+							"    else if (environment.day <10){",
+							"        pm.expect(jsonData.data.dob).to.be.eql(environment.year+'-'+environment.month+'-'+0+environment.day);",
+							"    }",
+							"    else if (environment.month <10 && environment.day <10){",
+							"        pm.expect(jsonData.data.dob).to.be.eql(environment.year+'-'+0+environment.month+'-'+0+environment.day);",
+							"    } else ",
+							"    pm.expect(jsonData.data.dob).to.be.eql(environment.year+'-'+environment.month+'-'+environment.day);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/student/{{studentId}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"student",
+						"{{studentId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify RC should be 200 upon student login\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(200);",
+							"});",
+							"",
+							"pm.test(\"Verify success should be true upon student login\", function () {",
+							"    pm.expect(jsonData.success).to.be.eql(true);",
+							"});",
+							"",
+							"pm.test(\"Verify Login Success message upon student login\", function () {",
+							"    pm.expect(jsonData.message).to.be.eql(\"Login Success\");",
+							"});",
+							"",
+							"pm.test(\"Verify property token is present upon student login\", function () {",
+							"    pm.expect(jsonData).to.have.property('token');",
+							"});",
+							"",
+							"// store data from response body",
+							"pm.environment.set(\"studentToken\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\" : \"{{studentEmail}}\",\n    \"password\" : \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update student info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify Student update\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{studentToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\" : \"updatedFN\",\n    \"lastName\" : \"updatedLN\",\n    \"email\"     : \"{{studentEmail}}\",\n    \"dob\"       : {\n        \"year\"      : 2013,\n        \"month\"     : 12,\n        \"day\"       : 31\n    },\n    \"gender\"    : \"male\",\n    \"agree\"     : true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/student/{{studentId}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"student",
+						"{{studentId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify Student password is updated\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{studentToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\"  : \"1234567\",\n    \"confirmPassword\"  : \"1234567\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/updatePassword/{{studentId}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"updatePassword",
+						"{{studentId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login with updated password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify RC should be 200 upon student login\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(200);",
+							"});",
+							"",
+							"pm.test(\"Verify success should be true upon student login\", function () {",
+							"    pm.expect(jsonData.success).to.be.eql(true);",
+							"});",
+							"",
+							"pm.test(\"Verify Login Success message upon student login\", function () {",
+							"    pm.expect(jsonData.message).to.be.eql(\"Login Success\");",
+							"});",
+							"",
+							"pm.test(\"Verify property token is present upon student login\", function () {",
+							"    pm.expect(jsonData).to.have.property('token');",
+							"});",
+							"",
+							"// store data from response body",
+							"pm.environment.set(\"studentToken\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\" : \"{{studentId}}\",\n    \"password\" : \"1234567\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete student from db",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Verify Student is deleted\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{studentToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/student/{{studentId}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"student",
+						"{{studentId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify if student is deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"console.log(jsonData);",
+							"",
+							"pm.test(\"Verify Student does not exist in db\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(404);",
+							"    pm.expect(jsonData.status).to.be.eql(404)",
+							"    pm.expect(jsonData.messages.error).to.be.eql('No Student Found with id '+environment.studentId)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/student/{{studentId}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"student",
+						"{{studentId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
