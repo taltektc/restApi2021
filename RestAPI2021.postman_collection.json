@@ -472,7 +472,7 @@
 							"const jsonData = pm.response.json();",
 							"",
 							"pm.test(\"Verify RC should be 200 upon getting student info\", function () {",
-							"    pm.expect(pm.response.code).to.be.eql(200);",
+							"    pm.expect(pm.response.code).to.be.eql(201);",
 							"});",
 							"",
 							"pm.test(\"Verify message should read student found\", function () {",
