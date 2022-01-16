@@ -206,7 +206,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"firstName\" : \"ad\",\n    \"lastName\" : \"{{studentLastName}}\",\n    \"email\"     : \"{{studentEmail}}\",\n    \"password\"  : \"123456\",\n    \"confirmPassword\"  : \"123456\",\n    \"dob\"       : {\n        \"year\"      : {{year}},\n        \"month\"     : {{month}},\n        \"day\"       : {{day}} \n    },\n    \"gender\"    : \"{{studentGender}}\",\n    \"agree\"     : true\n}\n",
+					"raw": "{\n    \"firstName\" : \"ad\",\n    \"lastName\" : \"{{studentLastName}}\",\n    \"email\"     : \"{{studentEmail}}\",\n    \"password\"  : \"123456\",\n    \"confirmPassword\"  : \"123456\",\n    \"dob\"       : {\n        \"year\"      : {{year}},\n        \"month\"     : {{month}},\n        \"day\"       : {{day}} \n    },\n    \"gender\"    : \"{{studentGender}}\",\n    \"agree\"     : true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
